@@ -216,8 +216,6 @@ class BaseUnitControl(Command):
         Command.__init__(self)
         self.name = 'unitcontrol'
 
-        self._Command__add_to_storage()
-
 
     def convert(self) -> str:
         value = f'BaseUnitControl'
