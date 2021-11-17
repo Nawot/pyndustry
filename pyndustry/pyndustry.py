@@ -1,5 +1,24 @@
 from __future__ import annotations
 import pyperclip
+import colorama
+
+colorama.init()
+
+
+COMMAND_COLORS = \
+{
+    'UNKNOWN': colorama.Fore.GREEN,
+    'OP': colorama.Fore.MAGENTA,
+    'JUMP': colorama.Fore.CYAN,
+    'UNIT': colorama.Fore.LIGHTYELLOW_EX,
+    'DATA': colorama.Fore.WHITE,
+    'CONTROL': colorama.Fore.LIGHTRED_EX
+}
+
+
+def set_command_color(color, str) -> str:
+    return color + str + colorama.Style.RESET_ALL
+
 
 
 class CommandsStorage(object):
@@ -112,7 +131,7 @@ class Command(object):
         Returns:
             str: String of mindustry logic command.
         """
-        return 'Command'
+        return set_command_color(COMMAND_COLORS['UNKNOWN'], 'Command')
 
 
     def to_variable(self) -> str:
@@ -189,7 +208,7 @@ class Variable(Command):
             str: String of mindustry logic command.
         """
         value = f'set {self.name} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['OP'], value)
 
 
     def to_variable(self) -> str:
@@ -376,7 +395,7 @@ class Operation(Command):
                 f'{self.value1} {self.value2}')
         else:
             value = f'op {self.operation}'
-        return value
+        return set_command_color(COMMAND_COLORS['OP'], value)
 
 
     def to_variable(self) -> str:
@@ -723,7 +742,7 @@ class BindPrinter(Command):
             str: String of mindustry logic command.
         """
         value = f'printflush {self.printer}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
     
 
     def to_variable(self) -> str:
@@ -765,7 +784,7 @@ class Mprint(Command):
             str: String of mindustry logic command.
         """
         value = f'print {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['DATA'], value)
     
     def to_variable(self) -> str:
         """
@@ -808,7 +827,7 @@ class Jump(Command):
         Returns:
             str: String of mindustry logic command.
         """
-        value = f'jump {self.to} {self.__condition}'
+        value = set_command_color(COMMAND_COLORS['JUMP'], f'jump {self.to} {self.__condition}')
         return value
 
 
@@ -1039,5 +1058,5 @@ class End(Command):
         Returns:
             str: String of mindustry logic command.
         """
-        value = f'end'
+        value = set_command_color(COMMAND_COLORS['JUMP'], f'end')
         return value

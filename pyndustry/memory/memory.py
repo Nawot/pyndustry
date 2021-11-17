@@ -1,5 +1,5 @@
 from __future__ import annotations
-from pyndustry import (Command, InsideCommand, Variable)
+from pyndustry import (Command, InsideCommand, Variable, set_command_color, COMMAND_COLORS)
 
 
 
@@ -28,7 +28,7 @@ class ReadMemory(Command):
 
     def convert(self) -> str:
         value = f'{self.name} {self.result} {self.memory} {self.index}'
-        return value
+        return set_command_color(COMMAND_COLORS['DATA'], value)
 
 
 
@@ -57,7 +57,7 @@ class WriteMemory(Command):
 
     def convert(self) -> str:
         value = f'{self.name} {self.value} {self.memory} {self.index}'
-        return value
+        return set_command_color(COMMAND_COLORS['DATA'], value)
 
 
 class MemoryStorage(Variable):

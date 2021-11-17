@@ -1,5 +1,5 @@
 from __future__ import annotations
-from pyndustry import (Command, InsideCommand, Variable)
+from pyndustry import (Command, InsideCommand, Variable, set_command_color, COMMAND_COLORS)
 from pyndustry.graphics import (SetColor, colorByTuple)
 
 
@@ -16,7 +16,7 @@ class Sensor(Command):
 
     def convert(self) -> str:
         value = f'sensor {self.result} {self.from_} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
     def to_variable(self) -> str:
@@ -33,7 +33,7 @@ class BaseControl(Command):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -52,7 +52,7 @@ class Enable(BaseControl):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -79,7 +79,7 @@ class Shoot(BaseControl):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object} {self.x} {self.y} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -104,7 +104,7 @@ class ShootTo(BaseControl):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object} {self.target} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -127,7 +127,7 @@ class Configure(BaseControl):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -150,7 +150,7 @@ class IlluminatorColor(BaseControl):
 
     def convert(self) -> str:
         value = f'control {self.name} {self.control_object} {self.color.r} {self.color.g} {self.color.b}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -183,7 +183,7 @@ class Radar(Command):
             f'radar {self.unit_type} {self.unit_type2} {self.unit_type3} '
             f'{self.order_by} {self.from_} {self.order} {self.result}'
         )
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
     def to_variable(self) -> str:
@@ -205,7 +205,7 @@ class UnitBind(Command):
 
     def convert(self) -> str:
         value = f'ubind {self.unit_type}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -219,7 +219,7 @@ class BaseUnitControl(Command):
 
     def convert(self) -> str:
         value = f'BaseUnitControl'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -235,7 +235,7 @@ class UnitIdle(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 class UnitStop(BaseUnitControl):
@@ -250,7 +250,7 @@ class UnitStop(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 class UnitMove(BaseUnitControl):
@@ -276,7 +276,7 @@ class UnitMove(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.radius}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -296,7 +296,7 @@ class UnitSetBoost(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -314,7 +314,7 @@ class UnitMoveToEnemySpawn(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -340,7 +340,7 @@ class UnitShoot(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -364,7 +364,7 @@ class UnitShootTo(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.target} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -385,7 +385,7 @@ class UnitDropItem(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.target} {self.ammount}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 class UnitDropPay(BaseUnitControl):
@@ -400,7 +400,7 @@ class UnitDropPay(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -424,7 +424,7 @@ class UnitTakeItem(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.target} {self.item} {self.ammount}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -443,7 +443,7 @@ class UnitTakePay(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.take_units}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -464,7 +464,7 @@ class UnitMine(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -483,7 +483,7 @@ class UnitSetFlag(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.value}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -510,7 +510,7 @@ class UnitBuild(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.block} {self.rotation} {self.config}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -537,7 +537,7 @@ class UnitBuild(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.block} {self.rotation} {self.config}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -562,7 +562,7 @@ class UnitGetBlock(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.block} {self.building}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 
@@ -587,7 +587,7 @@ class UnitGetBlock(BaseUnitControl):
 
     def convert(self) -> str:
         value = f'ucontrol {self.name} {self.x} {self.y} {self.radius} {self.result}'
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
     def to_variable(self) -> str:
@@ -622,7 +622,7 @@ class UnitRadar(Command):
             f'uradar {self.unit_type} {self.unit_type2} {self.unit_type3} '
             f'{self.order_by} 0 {self.order} {self.result}'
         )
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
     def to_variable(self) -> str:
@@ -660,7 +660,7 @@ class BaseUnitFind(Command):
             f'ulocate {self.name} {self.group} {self.is_enemy} 0 '
             f'{self.out_x} {self.out_y} {self.is_found} {self.result}'
             )
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
     def to_variable(self) -> str:
@@ -692,7 +692,7 @@ class UnitFindOre(BaseUnitFind):
             f'ulocate {self.name} {self.group} {self.is_enemy} {self.value} '
             f'{self.out_x} {self.out_y} {self.is_found} {self.result}'
             )
-        return value
+        return set_command_color(COMMAND_COLORS['UNIT'], value)
 
 
 

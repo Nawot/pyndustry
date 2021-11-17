@@ -1,5 +1,5 @@
 from __future__ import annotations
-from pyndustry import (Command, InsideCommand, Variable)
+from pyndustry import (Command, InsideCommand, Variable, set_command_color, COMMAND_COLORS)
 
 
 
@@ -20,7 +20,7 @@ class BindDrawer(Command):
 
     def convert(self) -> str:
         value = f'drawflush {self.drawer}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -95,7 +95,7 @@ class ClearColor(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.color.r} {self.color.g} {self.color.b} {self.color.a} 0 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -120,7 +120,7 @@ class SetColor(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.color.r} {self.color.g} {self.color.b} {self.color.a} 0 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -145,7 +145,7 @@ class SetStrokeWidth(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.width} 0 0 255 0 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -176,7 +176,7 @@ class DrawLine(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.x1} {self.y1} {self.x2} {self.y2} 0 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -217,7 +217,7 @@ class DrawRect(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.x} {self.y} {self.width} {self.height} 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -260,7 +260,7 @@ class DrawPoly(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.x} {self.y} {self.sides} {self.radius} {self.rotation}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -305,7 +305,7 @@ class DrawTriangle(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.x1} {self.y1} {self.x2} {self.y2} {self.x3} {self.y3}'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
@@ -331,7 +331,7 @@ class DrawGameSprite(Command):
 
     def convert(self) -> str:
         value = f'draw {self.name} {self.x} {self.y} {self.image} {self.size} {self.rotation} 0'
-        return value
+        return set_command_color(COMMAND_COLORS['CONTROL'], value)
 
 
 
