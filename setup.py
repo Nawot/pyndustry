@@ -9,7 +9,7 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 
 setup(
     name='pyndustry',
-    version='0.1',
+    version='0.1.1',
     author='Nawot',
     author_email='Nawot001@gmail.com',
     description='description',
@@ -26,5 +26,6 @@ setup(
     ],
     package_dir={'': 'pyndustry'},
     packages=find_packages(where='pyndustry'),
+    include_package_data = True,
     python_requires='>=3.6',
 )
