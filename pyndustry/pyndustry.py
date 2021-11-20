@@ -802,8 +802,9 @@ class Jump(Command):
 
     Args:
         condition (Union): Condition command such as < > == != and etc.
+        init bool: If True, creating command now, else create later with apply method.
     """
-    def __init__(self, condition : Union(str, bool)):
+    def __init__(self, condition : Union(str, bool), init : bool=True):
         Command.__init__(self)
         self.__condition = condition
         if isinstance(self.__condition, bool):
@@ -813,6 +814,13 @@ class Jump(Command):
                 self.__condition = Never()
         self.to = -1
 
+        if init:
+            self.apply()
+    
+
+    def apply(self):
+        """Creates Jump command. Useful when need jump to behind itself.
+        """
         self._Command__add_to_storage()
 
 
