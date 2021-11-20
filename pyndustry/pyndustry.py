@@ -1,6 +1,7 @@
 from __future__ import annotations
 import pyperclip
 import colorama
+import re
 
 colorama.init()
 
@@ -95,7 +96,8 @@ class CommandsStorage(object):
     def copy() -> None:
         """Copy final converting of commands to clipboard.
         """
-        pyperclip.copy(CommandsStorage.convert())
+        ansi_escape = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+        pyperclip.copy(ansi_escape.sub('', CommandsStorage.convert()))
 
 
     @staticmethod
